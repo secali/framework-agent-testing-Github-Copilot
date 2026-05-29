@@ -1,8 +1,12 @@
 # 🐱 CAT — Copilot Agent Testing
 
-Framework BDD de automatización de pruebas para agentes de GitHub Copilot y agentes de IA en general.
+**CAT** es un framework de automatización de pruebas BDD diseñado específicamente para agentes de GitHub Copilot e Inteligencias Artificiales conversacionales de alta complejidad.
 
-**Objetivo:** Verificar que un agente hace lo que dice que debe hacer — sin escribir código.
+El principal superpoder de CAT radica en su enfoque de **Pruebas Híbridas**:
+*   **🔌 Pruebas Deterministas (Sin LLM):** Ejecución ultra-rápida, económica y local utilizando aserciones sintácticas, patrones regex complejos, esquemas JSON Schema de respuesta y comprobación automática de llamadas a herramientas (*tool calling*). Ideal para integración continua (CI/CD).
+*   **🧠 Pruebas Semánticas (Con LLM-as-a-Judge):** Evaluaciones cognitivas profundas utilizando un modelo de lenguaje para calificar la calidad, claridad o equivalencia semántica de las respuestas del agente ante criterios complejos e inclusive comparar salidas contra fixtures históricos.
+
+Todo esto bajo un paradigma **100% Low-Code**: defines escenarios de validación complejos uniendo piezas de puzzle con lenguaje pseudo-natural, reduciendo al mínimo la necesidad de escribir código TypeScript/JavaScript.
 
 ## Filosofía
 
