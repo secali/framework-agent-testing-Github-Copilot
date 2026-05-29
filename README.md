@@ -8,6 +8,15 @@ El principal superpoder de CAT radica en su enfoque de **Pruebas Híbridas**:
 
 Todo esto bajo un paradigma **100% Low-Code**: defines escenarios de validación complejos uniendo piezas de puzzle con lenguaje pseudo-natural, reduciendo al mínimo la necesidad de escribir código TypeScript/JavaScript.
 
+## 🎛️ Modos de Ejecución: Elige tu Formato
+
+CAT te da la flexibilidad de estructurar tus pruebas de dos formas distintas según tu audiencia y objetivo:
+
+1. **✍️ Modo BDD (`.feature`):** La opción ideal para colaboración entre perfiles técnicos y no técnicos. Escribe pruebas usando lenguaje natural estructurado (Gherkin) aprovechando nuestra librería de 48 steps preconstruidos.
+2. **⚙️ Modo Suite (`.suite.yaml`):** Diseñado para una definición de pruebas compacta, programática y puramente declarativa basada en YAML. Ideal para ingeniería de prompts y suites de evaluación técnica.
+
+---
+
 ## Filosofía
 
 CAT usa un enfoque **low-code con Gherkin** (Given/When/Then). Viene con una librería de **48 steps pre-construidos** que encajan como piezas de puzzle para componer cualquier escenario de validación:
