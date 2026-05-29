@@ -15,6 +15,8 @@ CAT te da la flexibilidad de estructurar tus pruebas de dos formas distintas seg
 1. **✍️ Modo BDD (`.feature`):** La opción ideal para colaboración entre perfiles técnicos y no técnicos. Escribe pruebas usando lenguaje natural estructurado (Gherkin) aprovechando nuestra librería de 48 steps preconstruidos.
 2. **⚙️ Modo Suite (`.suite.yaml`):** Diseñado para una definición de pruebas compacta, programática y puramente declarativa basada en YAML. Ideal para ingeniería de prompts y suites de evaluación técnica.
 
+<img width="2816" height="1536" alt="Gemini_Generated_Image_wg4l63wg4l63wg4l" src="https://github.com/user-attachments/assets/2d447b13-a96d-4375-a592-72b10561db62" />
+
 ---
 
 ## Filosofía
