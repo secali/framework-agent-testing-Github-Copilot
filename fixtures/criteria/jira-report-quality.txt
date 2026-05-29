@@ -1,0 +1,35 @@
+# Criterios de evaluación LLM-judge para el informe de PLAT-4821
+# Referenciado desde: features/jira-analysis-agent.feature
+# Usado con: Then an LLM judge rates the response above {n} for:
+
+El informe técnico debe cumplir TODOS estos criterios:
+
+1. ESTRUCTURA — El informe incluye todas las secciones obligatorias:
+   - Resumen ejecutivo (con tabla o listado de métricas clave)
+   - Análisis de causa raíz con nivel de confianza explícito
+   - Evaluación de impacto (negocio Y técnico)
+   - Al menos 2 soluciones propuestas con pros y contras
+   - Plan de implementación con responsables y estimaciones
+   - Análisis de riesgos (probabilidad + impacto)
+   - Próximos pasos priorizados
+
+2. PRECISIÓN TÉCNICA — El informe:
+   - Identifica correctamente que el problema es el timeout de 30s del API Gateway vs. el procesamiento de 47.3s
+   - Menciona el commit a3f92c1 o la regresión del streaming como causa raíz
+   - Distingue entre la solución inmediata (hotfix) y la solución definitiva
+   - Reconoce la dependencia con PLAT-4756 (chart rendering)
+
+3. ACCIONABILIDAD — El informe permite actuar sin reuniones adicionales:
+   - Tareas concretas asignadas a roles específicos
+   - Estimaciones de tiempo realistas
+   - Criterios de éxito definidos y medibles
+
+4. HONESTIDAD TÉCNICA — El informe:
+   - Marca hipótesis como tales (no las presenta como hechos)
+   - Identifica información que falta y la solicita explícitamente
+   - No inventa datos que no están en el ticket
+
+5. CALIDAD DE COMUNICACIÓN:
+   - Lenguaje claro y estructurado
+   - Usa markdown con tablas, listas y código cuando es apropiado
+   - Longitud apropiada: suficientemente detallado pero sin relleno

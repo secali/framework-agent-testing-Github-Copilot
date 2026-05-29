@@ -1,0 +1,95 @@
+# ─────────────────────────────────────────────────────────────
+# Example: Testing a Code Assistant Agent (using mock adapter)
+# ─────────────────────────────────────────────────────────────
+
+suite: "Code Assistant - Basic Capabilities"
+description: >
+  Validates that the code assistant agent can handle common
+  programming tasks: code generation, explanation, and refactoring.
+
+agent:
+  adapter: mock
+  timeout: 30000
+  options:
+    delay: 50
+    responses:
+      "hello world.*python": |
+        Here's a Hello World function in Python:
+        ```python
+        def hello_world():
+            print("Hello, World!")
+        ```
+      "explain.*add": |
+        This function takes two parameters `a` and `b` and returns 
+        their sum using the `+` operator. It's a simple addition function.
+      "refactor.*loop": |
+        Here's the refactored version using list comprehension:
+        ```python
+        result = [x * 2 for x in items]
+        ```
+      ".*": "I can help you with that. Could you provide more details?"
+
+variables:
+  language: python
+  project: my-app
+
+tests:
+  # ─── Code Generation ────────────────────────────────────────
+  - name: "Generates hello world in Python"
+    tags: [generation, basic]
+    prompt: "Generate a hello world function in {{language}}"
+    evaluate:
+      - type: contains
+        expected: "def hello"
+        label: "Contains function definition"
+      - type: contains
+        expected: "print"
+        label: "Uses print statement"
+      - type: regex
+        pattern: "```python[\\s\\S]*```"
+        label: "Wraps code in Python code block"
+
+  # ─── Code Explanation ───────────────────────────────────────
+  - name: "Explains addition function"
+    tags: [explanation, basic]
+    prompt: "Explain this function: def add(a, b): return a + b"
+    evaluate:
+      - type: contains
+        expected: "sum"
+        label: "Mentions summation"
+      - type: not-contains
+        expected: "error"
+        label: "No error in response"
+
+  # ─── Code Refactoring ──────────────────────────────────────
+  - name: "Refactors loop to list comprehension"
+    tags: [refactoring]
+    prompt: "Refactor this loop to use list comprehension"
+    evaluate:
+      - type: regex
+        pattern: "\\[.*for.*in.*\\]"
+        label: "Contains list comprehension syntax"
+      - type: contains
+        expected: "comprehension"
+        label: "Mentions list comprehension"
+
+  # ─── Fallback Behavior ──────────────────────────────────────
+  - name: "Handles ambiguous requests gracefully"
+    tags: [edge-case]
+    prompt: "Do the thing"
+    evaluate:
+      - type: not-contains
+        expected: "error"
+        label: "Does not return error"
+      - type: contains
+        expected: "more details"
+        label: "Asks for clarification"
+
+  # ─── Skipped Test Example ────────────────────────────────────
+  - name: "Complex multi-file refactoring"
+    skip: true
+    tags: [refactoring, advanced]
+    prompt: "Refactor the authentication module"
+    evaluate:
+      - type: contains
+        expected: "auth"

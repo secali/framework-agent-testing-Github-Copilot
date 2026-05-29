@@ -1,0 +1,75 @@
+# ─────────────────────────────────────────────────────────────
+# Example: Testing a Real Agent via HTTP
+# ─────────────────────────────────────────────────────────────
+# This suite demonstrates how to test a real Copilot Extension
+# or AI agent exposed as an HTTP endpoint.
+#
+# To run: cat run -s suites/http-agent.suite.yaml \
+#             --var AGENT_URL=https://your-agent.com/api/chat \
+#             --var API_KEY=your-key
+
+suite: "HTTP Agent - Integration Tests"
+description: >
+  Integration tests against a live Copilot Extension endpoint.
+  Requires AGENT_URL and API_KEY variables.
+
+agent:
+  adapter: http
+  endpoint: "{{AGENT_URL}}"
+  auth:
+    Authorization: "Bearer {{API_KEY}}"
+  timeout: 60000
+
+variables:
+  AGENT_URL: "http://localhost:3000/api/chat"
+  API_KEY: "test-key"
+
+tests:
+  - name: "Agent responds to greetings"
+    tags: [smoke, basic]
+    prompt: "Hello, who are you?"
+    evaluate:
+      - type: not-contains
+        expected: "error"
+      - type: status-code
+        expected: 200
+
+  - name: "Agent follows system prompt instructions"
+    tags: [behavioral]
+    prompt: "What is your purpose?"
+    context:
+      systemPrompt: "You are a Kubernetes deployment assistant. Only answer questions about Kubernetes."
+    evaluate:
+      - type: contains
+        expected: "Kubernetes"
+        label: "Mentions Kubernetes"
+
+  - name: "Multi-turn conversation coherence"
+    tags: [multi-turn]
+    prompt: "What was I asking about?"
+    context:
+      history:
+        - role: user
+          content: "Help me deploy a Node.js app"
+        - role: assistant
+          content: "I'd be happy to help with your Node.js deployment. What platform are you targeting?"
+    evaluate:
+      - type: contains
+        expected: "Node"
+        label: "Remembers conversation context"
+
+  - name: "Agent response is valid JSON when requested"
+    tags: [format]
+    prompt: "Return a JSON object with fields: name, version, description for a sample project."
+    evaluate:
+      - type: json-schema
+        schema:
+          type: object
+          required: [name, version]
+          properties:
+            name:
+              type: string
+            version:
+              type: string
+            description:
+              type: string
