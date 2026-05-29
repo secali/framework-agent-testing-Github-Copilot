@@ -1,4 +1,4 @@
-# 🐱 CAT — Copilot Agent Testing
+# 🐱 CAT — Copilot Agent Testing for Github Copilot
 
 **CAT** es un framework de automatización de pruebas BDD diseñado específicamente para agentes de GitHub Copilot e Inteligencias Artificiales conversacionales de alta complejidad.
 
